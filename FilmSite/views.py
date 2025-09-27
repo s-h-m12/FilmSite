@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Movie, Review
 from django.db.models import Q
 
@@ -10,8 +10,9 @@ def index(request):
     return render(request, 'index.html', {'movies': movies,
                                                               'reviews': reviews})
 
-def movie(request):
-    return render(request,'movie.html')
+def movie_detail(request, id):
+    movie = get_object_or_404(Movie.objects.prefetch_related('genres', 'review_set__reviewer'), id=id)
+    return render(request,'movie.html', {'movie': movie})
 
 def reviewer(request):
     return render(request,'reviewer.html')

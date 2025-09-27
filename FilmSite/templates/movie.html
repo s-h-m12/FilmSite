@@ -2,9 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.12/dist/css/uikit.min.css" />
+    <title>{{ movie.title }}</title>
 </head>
 <body>
+    {% block content %}
+    <div class="uk-heading-medium">
+        <a>{{ movie.title }} • {{ movie.year }}</a>
+    </div>
+    <div class="movie-meta">
+        <span>
+            {{ movie.description }}
+        </span>
+
+        <span>
+                Жанр:   {% for genre in movie.genres.all %}
+                            {{ genre.name }}
+
+                            {% if not forloop.last %}
+                                ,
+                            {% endif %}
+
+                        {% endfor %}
+        </span>
+
+        <span>
+            {% if movie.average_rating %}
+                    {{ movie.average_rating|floatformat:1 }}/10
+                {% else %}
+            Нет оценок
+                {% endif %}
+        </span>
+
+         •
+        <span>
+                {% if movie.rating_count %}
+                   Отзывы: {{ movie.rating_count }}
+                {% else %}
+                    Нет отзывов
+                {% endif %}
+        </span>
+    </div>
+    <div>
+        <h2>Отзывы</h2>
+        {% if movie.review_set.all %}
+        <div>
+            {% for review in movie.review_set.all %}
+        </div>
+        <div>
+            <strong>
+                {{ review.reviewer.name }} • {{ review.published_at|date:"d.m.Y" }} • {{ review.rating }}/10
+            </strong>
+            <p>{{ review.text }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endblock %}
 
 </body>
 </html>
