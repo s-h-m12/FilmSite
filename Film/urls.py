@@ -21,6 +21,6 @@ from FilmSite import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('movie/<int:id>', views.movie_detail, name='movie_detail'),
-    path ('reviewer/', views.reviewer)
+    path('movie/<int:id>', views.movie_detail, name = 'movie_detail'),
+    path ('reviewer/<int:id>', views.reviewer_detail, name = 'reviewer_detail')
 ]

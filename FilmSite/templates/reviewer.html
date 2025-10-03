@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.12/dist/css/uikit.min.css" />
+    <title>{{ review.reviewer.name }}</title>
 </head>
 <body>
+    {% block content %}
+    <div class="uk-heading-small">
+        {{ review.reviewer.name }} • Возраст:{{ review.reviewer.age }} • Город:{{ review.reviewer.city }}
+    </div>
+
+    <div class="uk-heading-small">Отзывы</div>
+
+
+    {{ movie.title }}
+
+    {% endblock %}
 
 </body>
 </html>
