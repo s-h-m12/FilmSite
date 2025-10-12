@@ -15,5 +15,6 @@ def movie_detail(request, id):
     return render(request,'movie.html', {'movie': movie})
 
 def reviewer_detail(request, id):
-    review = get_object_or_404(Review.objects.select_related('reviewer', 'movie'), id = id)
-    return render(request,'reviewer.html', {'review': review})
+    reviewer = get_object_or_404(Reviewer, id=id)
+    reviews = Review.objects.filter(reviewer=reviewer).select_related('movie').order_by('-published_at')
+    return render(request, 'reviewer.html', {'reviewer': reviewer, 'reviews': reviews})
